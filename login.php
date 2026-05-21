@@ -21,6 +21,9 @@ if (isset($_SESSION['id_user'])) {
         <input type="password" name="password" required><br><br>
         
         <button type="submit">Masuk</button>
+            <br>
+    <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
+        
     </form>
 </body>
 </html>
