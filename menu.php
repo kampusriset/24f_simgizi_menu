@@ -301,7 +301,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <div>
                 <h1>Daftar Menu Makanan</h1>
             </div>
-            <a href="form-menu.php" class="btn btn-success">+ Input Menu</a>
+            <a href="templates/form-menu.php" class="btn btn-success">+ Input Menu</a>
         </div>
 
         <div class="table-card">
@@ -328,7 +328,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                         <span class="badge-tanggal"><?= $tanggal_tampil; ?></span>
                                         
                                         <a href="edit-menu.php?tanggal=<?= $data['tanggal_asli']; ?>" class="btn-edit-hari">
-                                            ✏️ Edit Menu
+                                            Edit Menu
                                         </a>
                                     </div>
                                 </td>
