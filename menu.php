@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 if (!isset($_SESSION['id_user'])) {
     header("Location: login.php");
@@ -9,8 +12,10 @@ include 'koneksi.php';
 
 $result = mysqli_query($conn, "SELECT * FROM menu_makanan ORDER BY tanggal_menu DESC, jenis ASC");
 
+$db_error = !$result ? mysqli_error($conn) : null;
+
 $menus_grouped = [];
-while ($row = mysqli_fetch_assoc($result)) {
+if ($result) while ($row = mysqli_fetch_assoc($result)) {
     if (!empty($row['tanggal_menu'])) {
         $tanggal_key = $row['tanggal_menu']; // Digunakan untuk link parameter ID/Tanggal
         $tanggal_tampil = date('d M Y', strtotime($row['tanggal_menu']));
@@ -303,6 +308,13 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
             <a href="templates/form-menu.php" class="btn btn-success">+ Input Menu</a>
         </div>
+
+        <?php if ($db_error): ?>
+        <div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:16px 20px;border-radius:10px;margin-bottom:20px;font-size:14px;">
+            <strong>⚠️ Error Database:</strong> <?= htmlspecialchars($db_error) ?><br>
+            <small>Pastikan tabel <code>menu_makanan</code> sudah dibuat di database <code>sim_gizi</code>.</small>
+        </div>
+        <?php endif; ?>
 
         <div class="table-card">
             <table>
